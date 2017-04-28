@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Accelerometer Javascript Test</title>
+        <meta name="viewport" content="width=device-width,user-scalable=yes" />
+        <style>
+        body {
+            font-family: helvetica, arial, sans serif;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div id="content">
+            <h1>Accelerometer Javascript Test</h1>
+            <p><span id="features"></span></p>
+            <span id="example"></span>
+            <span> 
+                Dostepne funkcje i ustawienia: <br>
+                gyro.frequency = 500 <br>
+                gyro.getOrientation() <br>
+                gyro.startTracking(function(o){...}) <br>
+                gyro.stopTracking() <br>
+                gyro.hasFeature('devicemotion') <br> 
+                gyro.getFeatures() <br>
+            </span>
+        </div>
+    <script type="text/javascript" src="main.js"></script>
+    <script>
+		gyro.startTracking(function(o) {
+			var b = document.getElementById('example'),
+					f = document.getElementById('features');
+			f.innerHTML = gyro.getFeatures();
+			b.innerHTML = "<p> x = " + o.x + "</p>" +
+                        "<p> y = " + o.y + "</p>" +
+                        "<p> z = " + o.z + "</p>" +
+                        "<p> alpha = " + o.alpha + "</p>" +
+                        "<p> beta = " + o.beta + "</p>" +
+                        "<p> gamma = " + o.gamma + "</p>";
+		});
+	</script>
+    </body>
+</html>
