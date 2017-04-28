@@ -169,9 +169,6 @@
 	/**
 	 * @private
 	 */
-	// it doesn't make sense to depend on a "window" module
-	// since deviceorientation & devicemotion make just sense in the browser
-	// so old school test used.
 	if (window && window.addEventListener) {
 		function setupListeners() {
 			function MozOrientationInitListener (e) {
@@ -179,9 +176,9 @@
 				e.target.removeEventListener('MozOrientation', MozOrientationInitListener, true);
 
 				e.target.addEventListener('MozOrientation', function(e) {
-					measurements.x = e.x - calibration.x;
-					measurements.y = e.y - calibration.y;
-					measurements.z = e.z - calibration.z;
+					measurements.x = (e.x - calibration.x).toPrecision(3);
+					measurements.y = (e.y - calibration.y).toPrecision(3);
+					measurements.z = (e.z - calibration.z).toPrecision(3);
 				}, true);
 			}
 			function deviceMotionListener (e) {
@@ -189,9 +186,9 @@
 				e.target.removeEventListener('devicemotion', deviceMotionListener, true);
 
 				e.target.addEventListener('devicemotion', function(e) {
-					measurements.x = e.accelerationIncludingGravity.x - calibration.x;
-					measurements.y = e.accelerationIncludingGravity.y - calibration.y;
-					measurements.z = e.accelerationIncludingGravity.z - calibration.z;
+					measurements.x = (e.accelerationIncludingGravity.x - calibration.x).toPrecision(3);
+					measurements.y = (e.accelerationIncludingGravity.y - calibration.y).toPrecision(3);
+					measurements.z = (e.accelerationIncludingGravity.z - calibration.z).toPrecision(3);
 				}, true);
 			}
 			function deviceOrientationListener (e) {
@@ -212,13 +209,13 @@
 					var calibrated = quaternionMultiply(calib, raw);
 					var calibEuler = quaternionToEuler(calibrated);
 
-					measurements.alpha = calibEuler.alpha;
-					measurements.beta = calibEuler.beta;
-					measurements.gamma = calibEuler.gamma;
+					measurements.alpha = calibEuler.alpha.toPrecision(3);
+					measurements.beta = calibEuler.beta.toPrecision(3);
+					measurements.gamma = calibEuler.gamma.toPrecision(3);
 
-					measurements.rawAlpha = e.alpha;
-					measurements.rawBeta = e.beta;
-					measurements.rawGamma = e.gamma;
+					measurements.rawAlpha = e.alpha.toPrecision(3);
+					measurements.rawBeta = e.beta.toPrecision(3);
+					measurements.rawGamma = e.gamma.toPrecision(3);
 				}, true);
 			}
 
