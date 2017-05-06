@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^upload/$', upload_file, name='upload_file'),
-    url(r'^success/$', success, name='success_url'),
+    url(r'^success/?P<class_name>[a-zA-Z]+/$', success, name='success_url'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
